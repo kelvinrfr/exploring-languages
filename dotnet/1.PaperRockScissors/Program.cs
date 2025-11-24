@@ -7,7 +7,7 @@ Console.CancelKeyPress += delegate {
 };
 
 Console.WriteLine("Hello, welcome to the Rock, Paper and Scissors!");
-
+await GameLoopAsync(appCancellation.Token);
 // It's going to be User VS Bot
 // The Bot will count down from 5 to 1 
 // The user should be able to type their option on that time.
@@ -21,11 +21,6 @@ Console.WriteLine("Hello, welcome to the Rock, Paper and Scissors!");
 // ask if the user wants to play again
 // Keep a score from rounds
 // Print the score at the end (Ctrl+C)
-
-
-var gameLoopTask = GameLoopAsync(appCancellation.Token);
-
-await Task.WhenAll(gameLoopTask);
 
 async Task GameLoopAsync(CancellationToken c)
 {
