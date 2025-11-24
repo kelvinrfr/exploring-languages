@@ -37,12 +37,10 @@ async Task GameLoopAsync(CancellationToken c)
         Console.WriteLine("Rock (1), Paper (2), Scissors (3) on");
         var cancelGameLoop = CancellationTokenSource.CreateLinkedTokenSource(c);
         var countDownTask = CountDownAsync(seconds:3, cancelGameLoop.Token);
-
         var entryTask = ReadUserEntryAsync(cancelGameLoop.Token);
 
         await Task.WhenAny(countDownTask, entryTask);
         cancelGameLoop.Cancel();
-        Console.WriteLine("debug: cancelled");
 
         var timeLeft = await countDownTask;
         var entry = await entryTask;
