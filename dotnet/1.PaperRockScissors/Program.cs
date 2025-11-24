@@ -71,7 +71,7 @@ async Task<char?> ReadUserEntryAsync(CancellationToken c)
     while (!Console.KeyAvailable) 
     {
         try { await Task.Delay(100, c); }
-        catch { return null; }
+        catch(OperationCanceledException) { return null; }
     }
     return Console.ReadKey(intercept: true).KeyChar;
 }
